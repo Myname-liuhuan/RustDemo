@@ -7,7 +7,3 @@ edition = "2021"
 
 [dependencies]
 
-# 在创建本项目的机器上可以不配置，但是在项目被其它机器在仓库中拉取后，会找不到主入口，所以需要配置bin
-[[bin]]
-name = "hello"
-path = "src/hello.rs"
