@@ -37,6 +37,19 @@ mod tests {
         // :?：打印调试格式。
         println!("{} of {:b} people know binary, the other half don't", 1, 3);
 
+        //批量填充（对齐）
+        // : 格式化字符串中，: (冒号) 用于指示要应用的格式说明符的开始
+        // number 表示实际数据
+        // width 表示总长度
+        // > 表示右对齐即填充在左侧
+        // < 表示左对齐即填充在右侧
+        // $ 用于引用命名参数
+        //右对齐，空格填充
+        println!("{number:>width$}", number=1, width=6);
+        //字符填充
+        println!("{number:>0width$}", number=1, width=6);
+        //左对齐,字符填充
+        println!("{number:<0width$}", number=1, width=6);
     }
 
 
