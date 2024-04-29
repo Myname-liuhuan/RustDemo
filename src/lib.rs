@@ -52,6 +52,10 @@ mod tests {
         println!("{number:>0width$}", number=1, width=6);
         //左对齐,字符填充
         println!("{number:<0width$}", number=1, width=6);
+
+        //print会进行参数检查
+        //println!("My name is {0}, {1} {0}", "Bond");
+
     }
 
 
