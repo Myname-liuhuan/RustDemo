@@ -1,5 +1,7 @@
 #[cfg(test)]
 mod tests {
+    use std::string;
+
     #[test]
     fn it_works() {
         let result = 2 + 2;
