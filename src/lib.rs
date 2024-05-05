@@ -45,13 +45,14 @@ mod tests {
         // width 表示总长度
         // > 表示右对齐即填充在左侧
         // < 表示左对齐即填充在右侧
-        // $ 用于引用命名参数
+        // $ 用于声明这里的width是一个待填充的变量
+        // 模板写法是 {数字:默认填充的字符 左对齐/右对齐 宽度}，但是在默认填充字符为0时可以把对齐符号提到冒号后面
         //右对齐，空格填充
         println!("{number:>width$}", number=1, width=6);
         //字符填充
-        println!("{number:>0width$}", number=1, width=6);
+        println!("{number:0>width$}", number=1, width=6);
         //左对齐,字符填充
-        println!("{number:<0width$}", number=1, width=6);
+        println!("{number:9<width$}", number=2, width=6);
 
         //print会进行参数检查
         //println!("My name is {0}, {1} {0}", "Bond");
