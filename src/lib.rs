@@ -70,7 +70,8 @@ mod tests {
      */
     #[test]
     fn string_test() {
-        let a_str: &str = "我是str";
+        //&str往往用来表示固定的文本，就算声明变量的时候定义为mut,也不支持string那样的push()等方法
+        let a_str = "我是str";
         println!("打印str：{}", a_str);
 
         // String的本质是字符数组 Vec<u8>
