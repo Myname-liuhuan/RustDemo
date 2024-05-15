@@ -98,4 +98,32 @@ mod tests {
     //     let arr_str =  arr.iter().map(f);
     //     println!("打印数组：", String::from_utf8(arr) );
     // }
+
+    //重影（Shadowing）:后声明的变量可以使用前面使用过的变量名称，将会覆盖前面的变量
+    //正式版定义：重影是指用同一个名字重新代表另一个变量实体，其类型、可变属性和值都可以变化
+    #[test]
+    fn shadowing(){
+        let x = 5;
+        let x = x + 1;
+        let x = x * 2;
+        println!("The value of x is: {}", x);
+    }
+
+
+    //进制写法
+    //声明一个变量的时候可以使用常见的进制
+    #[test]
+    fn hex_test(){
+        let hex = 0xff; //16进制
+        let bin = 0b1111_0000; //二进制
+        let oct = 0o77; //8进制
+        let dec = 1_255; //10进制
+        let hex_str = "ff";//字符串
+        println!("hex:{}", hex);
+        println!("bin:{}", bin);
+        println!("oct:{}", oct);
+        println!("dec:{}", dec);
+        println!("hex_str:{}", hex_str);
+    }
+
 }
