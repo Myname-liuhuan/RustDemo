@@ -126,4 +126,14 @@ mod tests {
         println!("hex_str:{}", hex_str);
     }
 
+    //元组
+    #[test]
+    fn tuple_test(){
+        let tup = (500, 6.4, 1);
+        let (x, y, z) = tup;
+        println!("x:{}", x);
+        println!("y:{}", y);
+        println!("z:{}", z);
+    }
+
 }
