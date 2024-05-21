@@ -136,4 +136,43 @@ mod tests {
         println!("z:{}", z);
     }
 
+    //条件语句
+    #[test]
+    fn condition_test(){
+        let a = 1;
+        if a == 1 {
+            println!("a is 1");
+        } else if a == 2 {
+            println!("a is 2");
+        } else {
+            println!("a is neither 1 nor 2");
+        }
+
+        //实现类似三元运算符的功能
+        let num = 4;
+        let boo = if num < 5 { true } else { false };
+        println!("result: {}", boo);
+    }
+
+    //循环
+    #[test]
+    fn loop_test(){
+        //loop循环
+        let mut counter = 0;
+        let result = loop {
+            counter += 1;
+            if counter == 10 {
+                break counter * 2;
+            }
+        };
+        println!("result: {}", result);
+
+        //while循环
+        let mut number = 3;
+        while number!= 0 {
+            println!("{}!", number);
+            number -= 1;
+        }
+    }
+
 }
