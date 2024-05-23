@@ -175,4 +175,59 @@ mod tests {
         }
     }
 
+    //迭代器
+    #[test]
+    fn iterator_test(){
+        //借用迭代器
+        let v1 = vec![1, 2, 3];
+        let v1_iter = v1.iter();
+        for val in v1_iter {
+            println!("v1: {}", val);
+        }
+
+        //可变借用迭代器
+        let mut v2 = vec![1, 2, 3];
+        let v2_iter_mut = v2.iter_mut();
+        for val in v2_iter_mut {
+            *val *= 2;
+        }
+        println!("v2的值 {:?}", v2);
+
+        //所有权迭代器
+        let v3 = vec![1, 2, 3];
+        let v3_iter_into = v3.into_iter();
+        for val in v3_iter_into {
+            println!("v3: {}", val);
+        }
+        // println!("v3的值 {:?}", v3); //报错，v3的所有权已经被转移
+
+        //迭代器的Map方法
+        let v4 = vec![1, 2, 3];
+        let v4_iter_map = v4.iter().map(|x| x + 1);
+        println!("v4_iter_map: {:?}", v4_iter_map);
+        let v4_iter_map_collect:Vec<i32> = v4.iter().map(|x| x * x).collect();
+        println!("v4_iter_map_collect: {:?}", v4_iter_map_collect);
+
+        //迭代器的Filter方法
+        let v5 = vec![1, 2, 3, 4, 5, 6];
+        let v5_iter_filter = v5.iter().filter(|x| *x % 2 == 0);
+        println!("v5_iter_filter: {:?}", v5_iter_filter);
+        let v5_iter_filter_collect:Vec<i32> = v5.into_iter().filter(|x| *x % 2 == 0).collect();
+        println!("v5_iter_filter_collect: {:?}", v5_iter_filter_collect);
+
+        //for循环遍历迭代器
+        let v6 = vec![1, 2, 3, 4, 5, 6];
+        for &num in v6.iter(){
+            println!("v6_iter_for: {}", num);
+        }
+
+        //消费迭代器 iter.next()
+        let v7 = vec![1, 2, 3, 4, 5, 6];
+        let mut v7_iter = v7.iter();
+        while let Some(num) = v7_iter.next() {
+            println!("v7_iter_next: {}", num);
+        }
+        
+
+    }
 }
