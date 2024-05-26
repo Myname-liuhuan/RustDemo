@@ -7,3 +7,7 @@ edition = "2021"
 
 [dependencies]
 
+[[bin]]
+name = "file"
+path = "src/file.rs"
+
