@@ -240,9 +240,102 @@ mod tests {
         //读取作用域参数相加
         let x = 5;
         let sum_x = |y| x + y;
-        println!("sum_x: {}", sum_x(2))
+        println!("sum_x: {}", sum_x(2));
 
-        //
+        //读取多个参数
+        let a  = 5;
+        let b = 6;
+        let sum_ab = |a, b| a + b;
+        println!("sum_ab: {}", sum_ab(3, 4));
+    }
+
+    /**
+     * 所有权（核心） 
+     * 所有权规则
+     * 1. Rust中的每一个值都有一个被称为其所有者（owner）的变量。
+     * 2. 值在任一时刻有且只有一个所有者。
+     * 3. 当所有者（变量）离开作用域，这个值将被丢弃。
+     * 
+     * 所有权是指变量在代码中能使用的范围，在超过范围后就会被回收内存变为无效变量
+     * 所有权的设计让rust成为了当前最安全的语言，因为它会强制要求开发者注意内存问题
+     * 
+     */
+    #[test]
+    fn ownership_test(){
+        //所有权转移
+        let s1 = "hello";
+        let s2 = s1;
+        // println!("s1: {}", s1); //报错，s1的所有权已经被转移
+        println!("s2: {}", s2);
+
+        //应用类型的值传递也会造成所有权的传递，即在调用函数后，该参数在当前主代码块中失效
+        let s3 = String::from("hello");
+        takes_ownership(s3);
+        // println!("引用类型所有权测试 s3: {}", s3); //报错，s3的所有权已经被转移
+
+        //基本数据类型不一样，在作为参数传递给函数后，当前主代码块中还可以使用
+        let s4 = 9;
+        makes_copy(s4);
+        println!("基本类型所有权测试 s4: {}", s4);
+
+
+        //函数返回所有权
+        let s5 = String::from("kpop");
+        let s6 = gives_ownership(s5);
+        println!("函数返回所有权 s6: {}", s6);
+        // println!("函数返回所有权 s5: {}", s5); //报错，s5的所有权已经被转移
+
+    
+        //引用与租借
+        //在使用引用传参调用函数的时候不会改变参数别的所有权
+        let s7 = String::from("hello");
+        let len = calculate_length(&s7);
+        println!("字符 {} 的长度是{}", s7, len);
+
+    }
+
+    fn takes_ownership(some_string: String) {
+        println!("takes_ownership： {}", some_string);
+    }
+    fn makes_copy(some_integer: i32) {
+        println!("makes_copy： {}", some_integer);
+    }
+    fn gives_ownership(some_string: String) -> String {
+        println!("gives_ownership： {}", some_string);
+        return some_string;
+    }
+    fn calculate_length(s: &String) -> usize {
+        s.len()
+    }
+    
+    /**
+     * 引用
+     * 引用允许你使用值但不获取其所有权，即允许你引用一个值而不用获取其所有权
+     */
+    #[test]
+    fn reference_test(){
+        //源值如果失效，那么所有引用它的引用都会失效
+        let s1 = String::from("hello");
+        let s2 = &s1;
+        let s3 = s1;
+        //println!("s1: {}", s1); //报错，s1的所有权已经被转移
+        //println!("s2: {}", s2); //报错，源值已失效
+        println!("s3: {}", s3);
+
+
+        //如果源值是mut的，那么引用也是mut；如果源值不可变，那么引用的值也不可变
+        let s4 = String::from("hello");
+        let s5 = &s4;
+        //s4.push_str("world");//报错，因为s4不可变
+        //s5.push_str("world");//报错，因为s4不可变,所以引用它的s5也是不可变的
+        let mut s6 = String::from("hello");
+        let s7 = &mut s6;
+        s7.push_str("world"); //可以调用，因为源可变
+        //println!("s6: {}", s6); //在创建对可变mut变量的引用后，源值不再可用，是为了防止数据竞争确保内存安全
+        println!("s7: {}", s7);
+
+
+        
     }
 
 }
