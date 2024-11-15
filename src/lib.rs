@@ -346,4 +346,46 @@ mod tests {
         
     }
 
+
+    /**
+     * 切片
+     * 切片（Slice）是对数据值的部分引用
+     * 
+     * 语法 ..
+     * ..y 等价于 0..y
+     * x.. 等价于位置 x 到数据结束
+     * .. 等价于位置 0 到结束
+    */
+    #[test]
+    fn slice_test(){
+        let s1 = String::from("hello world");
+        let hello = &s1[0..5];
+        let world = &s1[6..11];
+        println!("{} = {} + {}", s1, hello, world);
+
+        //&str其实就是String的（引用/切片）
+        let s2 = String::from("hello world");
+        let hello = &s2[..];
+        println!("(源){} = (切片){}", s2, hello);
+
+        //因为String的本质就是数组，所以可以推断出 数组也是支持切片的
+        let arr = [1, 2, 3, 4, 5];
+        let slice = &arr[0..3];
+        println!("{:?}", slice);
+
+    }
+
+
+    /**
+     * 结构体
+    */
+    struct Rectangle {
+        width: u32,
+        height: u32,
+    }
+
+    fn area(rectangle: &Rectangle) -> u32 {
+        rectangle.width * rectangle.height
+    }
+
 }
