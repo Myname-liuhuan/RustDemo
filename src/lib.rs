@@ -74,6 +74,14 @@ mod tests {
         let a_str = "我是str";
         println!("打印str：{}", a_str);
 
+        //字符中的转义与取消转义
+        let path = "D:/tmp/document/test.txt";
+        //等价于path,因为字符中存在\t等转义内容，所以需要加r表示该字符串为原始字符串不需要转义
+        let path2 = r"D:\tmp\document\test.txt";
+        
+        println!("打印path：{}", path);
+        println!("打印path2：{}", path2);
+
         // String的本质是字符数组 Vec<u8>
         let mut b_string: String = String::from("我是string");
         b_string.push('c');
